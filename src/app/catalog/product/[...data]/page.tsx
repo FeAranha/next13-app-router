@@ -1,4 +1,4 @@
-'use client'
+import { AddToCartButton } from './add-to-cart-button'
 
 interface ProductProps {
   params: {
@@ -7,16 +7,10 @@ interface ProductProps {
 }
 
 export default async function Product({ params }: ProductProps) {
-  //timeOut 3 s
-await new Promise((resolve) => setTimeout(resolve, 3000))
+  const response = await fetch('https://api.github.com/users/fearanha')
+  const user = await response.json()
 
   const [productId, size, color] = params.data
-  console.log(params)
-  
-  function addToCart() {
-    //consoleLog feature add to cart ^^
-    console.log('adicionou ao carrinho')
-  }
 
   return (
     <div>
@@ -24,7 +18,7 @@ await new Promise((resolve) => setTimeout(resolve, 3000))
       <p>Size: {size}</p>
       <p>Color: {color}</p>
 
-      <button onClick={addToCart}>Adicionar ao carrinho</button>
+      <AddToCartButton />
     </div>
   )
 }
