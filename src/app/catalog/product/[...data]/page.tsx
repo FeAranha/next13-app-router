@@ -6,12 +6,15 @@ interface ProductProps {
   }
 }
 
-export default function Product({ params }: ProductProps) {
-  const [productId, size, color] = params.data
+export default async function Product({ params }: ProductProps) {
+  //timeOut 3 s
+await new Promise((resolve) => setTimeout(resolve, 3000))
 
+  const [productId, size, color] = params.data
   console.log(params)
   
   function addToCart() {
+    //consoleLog feature add to cart ^^
     console.log('adicionou ao carrinho')
   }
 
