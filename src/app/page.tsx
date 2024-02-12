@@ -1,26 +1,23 @@
-import { Suspense } from "react"
-
-async function getData() {
-  const response = await fetch('https://api.github.com/users/fearanha')
-  const user = await response.json()
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch data')
-  }
-
-  return <pre>{JSON.stringify(user, null, 2)}</pre>
-}
+import { GithubProfile } from "@/components/github-profile"
+import { LongWaitComponent } from '@/components/long-wait-component'
+import { Suspense } from 'react'
 
 export default async function Home() {
-  //timeOut 3 s
-await new Promise((resolve) => setTimeout(resolve, 3000))
+  await new Promise((resolve) => setTimeout(resolve, 2000))
 
-  const data = await getData()
+  return (
+    <div>
+      <h1>Home</h1>
 
-  return (<main>
-    <Suspense>
-      {data}
-    </Suspense>
-  </main>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos distinctio adipisci facere tenetur voluptatum. Ea, quis cumque. Blanditiis voluptate quibusdam quisquam delectus? Dicta ea veritatis dolorem atque consectetur nostrum ex?
+      </p>
+
+      <Suspense fallback={<p>Carregando LongWaitComponent</p>}>
+        <LongWaitComponent />
+      </Suspense>
+      <Suspense fallback={<p>Carregando GithubProfile</p>}>
+        <GithubProfile />
+      </Suspense>
+    </div>
   )
 }
